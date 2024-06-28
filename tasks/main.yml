@@ -1,4 +1,26 @@
 ---
-- name: "Mock task"
-  ansible.builtin.debug:
-    msg: "hello, world!"
+- name: "Install ARA"
+  ansible.builtin.pip:
+    name:
+      - ara[server]=={{ version }}
+    state: present
+
+- name: "Get ARA plugins path"
+  register: callback_plugins_path
+  changed_when: false
+  ansible.builtin.command:
+    cmd: python3 -m ara.setup.callback_plugins
+
+- name: "Ensure Ansible config file directory exists"
+  ansible.builtin.file:
+    name: "{{ ansible_cfg_path | dirname }}"
+    state: directory
+    mode: "0755"
+
+- name: "Set ANSIBLE_CALLBACK_PLUGINS option in Ansible config"
+  community.general.ini_file:
+    path: "{{ ansible_cfg_path }}"
+    section: defaults
+    option: callback_plugins
+    value: "{{ callback_plugins_path.stdout }}"
+    mode: "0644"

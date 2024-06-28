@@ -1,7 +1,7 @@
-template
+ara
 =========
 
-Template for Ansible role monorepos
+Deploy ARA for monitoring local playbook runs.
 
 Requirements
 ------------
@@ -23,7 +23,7 @@ Example Playbook
 
 ```yaml
 roles:
-    - role: genlab.template
+    - role: genlab.ara
 ```
 
 License

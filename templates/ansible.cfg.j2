@@ -1,0 +1,12 @@
+[defaults]
+inventory  = hosts.yaml
+vault_password_file = {{ vault_password_file }}
+callback_plugins = {{ callback_plugins_path }}
+
+# Logging is off by default unless this path is defined.
+log_path   = logs/ansible.log
+
+roles_path = roles:~/.ansible/roles
+
+[ssh_connection]
+ssh_args   = -o ForwardAgent=yes -o ControlMaster=auto -o ControlPersist=60s

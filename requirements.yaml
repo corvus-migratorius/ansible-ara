@@ -1,0 +1,4 @@
+---
+roles:
+  - name: "genlab.semaphore"
+    src: "https://github.com/corvus-migratorius/ansible-ara.git"
